@@ -10,6 +10,7 @@ const DeleteProduct = () => {
     const [result, setresult] = useState('');
     const fetchProducts = async () => {
         setloading(true);
+        setproductlist([]);
         const data = await fetchData('/api/products');
         setproductlist(data);
         setloading(false);
@@ -17,7 +18,6 @@ const DeleteProduct = () => {
     const deleteProductId = async (product) => {
         setloading(true);
         setresult('');
-        setproductlist([]);
         const productToDelete = {
             id: product
         }
