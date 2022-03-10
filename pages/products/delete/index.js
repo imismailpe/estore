@@ -17,15 +17,18 @@ const DeleteProduct = () => {
     const deleteProductId = async (product) => {
         setloading(true);
         setresult('');
+        setproductlist([]);
         const productToDelete = {
             id: product
         }
         const result = await submitProductDeletion(productToDelete);
         if (result.ok) {
-            setresult('Deleted successfully')
-            fetchProducts();
+            setresult('Deleted successfully');
         }
-        setloading(false);
+        else{
+            setresult(result.error);
+        }
+        fetchProducts();
     }
     useEffect(() => {
         fetchProducts();
