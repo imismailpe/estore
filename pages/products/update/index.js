@@ -45,7 +45,12 @@ const UpdateProduct = () => {
                                 <ProductView product={product} />
                                 <div className={styles.deleteButton}>
                                     <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
-                                    <Link className={styles.editButton} href={{ pathname: '/[productid]', query: { productId: product._id } }}>Edit</Link>
+                                    <Link className={styles.editButton}
+                                        href={{
+                                            pathname: `/products/update/[productid]`,
+                                            query: { productId: product._id }
+                                        }}
+                                    >Edit</Link>
                                 </div>
                             </div>
                         })
