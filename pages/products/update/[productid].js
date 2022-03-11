@@ -5,7 +5,7 @@ import styles from '../index.module.css';
 
 const EditProduct = () => {
     const router = useRouter();
-    const productId = router.query.productid;
+    const productId = router.query.productId;
     const productNameRef = useRef(null);
     const productMrpRef = useRef(null);
     const productCostRef = useRef(null);
@@ -19,7 +19,7 @@ const EditProduct = () => {
     const fetchProducts = async () => {
         setloading(true);
         setproductlist([]);
-        const data = await fetchData('/api/products' + productId);
+        const data = await fetchData('/api/products/' + productId);
         setproductlist(data);
         productNameRef.current.value = '';
         productMrpRef.current.value = 1;
