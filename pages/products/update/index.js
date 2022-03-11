@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { fetchData, submitProductDeletion } from "../../../utils/functions";
 import styles from '../index.module.css';
 import ProductView from "../product";
 
-const DeleteProduct = () => {
+const UpdateProduct = () => {
     const [productlist, setproductlist] = useState([]);
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
@@ -44,6 +45,7 @@ const DeleteProduct = () => {
                                 <ProductView product={product} />
                                 <div className={styles.deleteButton}>
                                     <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
+                                    <Link href='/update/[productid]'>Edit</Link>
                                 </div>
                             </div>
                         })
@@ -52,4 +54,4 @@ const DeleteProduct = () => {
         </Fragment>
     )
 }
-export default DeleteProduct;
+export default UpdateProduct;

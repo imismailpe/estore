@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react"
 import { fetchData, submitProduct } from "../../../utils/functions";
 import styles from '../index.module.css';
 
-const AddProduct = () => {
+const EditProduct = () => {
+    const router = useRouter();
+    const productId = router.query.productid;
     const productNameRef = useRef(null);
     const productMrpRef = useRef(null);
     const productCostRef = useRef(null);
@@ -12,6 +15,20 @@ const AddProduct = () => {
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);
+    const [productlist, setproductlist] = useState([]);
+    const fetchProducts = async () => {
+        setloading(true);
+        setproductlist([]);
+        const data = await fetchData('/api/products' + productId);
+        setproductlist(data);
+        productNameRef.current.value = '';
+        productMrpRef.current.value = 1;
+        productQuantiryRef.current.value = 1;
+        productCostRef.current.value = 1;
+        productSellingpriceRef.current.value = 1;
+        setloading(false);
+    }
+
     const fetchCategories = async () => {
         setloading(true);
         const categories = await fetchData('/api/categories');
@@ -19,9 +36,10 @@ const AddProduct = () => {
         setloading(false);
     }
     useEffect(() => {
+        fetchProducts();
         fetchCategories();
     }, []);
-    const submitNewProduct = async (product) => {
+    const submitProductUpdate = async (product) => {
         const result = await submitProduct(product);
         return result;
     }
@@ -36,7 +54,7 @@ const AddProduct = () => {
         if (name && mrp && category && quantity && sellingPrice && cost) {
             setloading(true);
             setresult('');
-            const newProduct = {
+            const updatedProduct = {
                 name,
                 mrp,
                 category,
@@ -44,14 +62,14 @@ const AddProduct = () => {
                 cost,
                 sellingPrice
             }
-            const result = await submitNewProduct(newProduct);
+            const result = await submitProductUpdate(updatedProduct);
             if (result.ok) {
                 productNameRef.current.value = '';
                 productMrpRef.current.value = 1;
                 productQuantiryRef.current.value = 1;
                 productCostRef.current.value = 1;
                 productSellingpriceRef.current.value = 1;
-                setresult('Added product successfully.');
+                setresult('Updated product successfully.');
             }
             else{
                 setresult(result.error);
@@ -61,7 +79,7 @@ const AddProduct = () => {
     }
     return (
         <div>
-            <h4>Add a product</h4>
+            <h4>Update a product</h4>
             <p>{result}</p>
             <form onSubmit={handleSubmission} className={styles.addProductForm}>
                 <div>
@@ -97,4 +115,4 @@ const AddProduct = () => {
         </div>
     )
 }
-export default AddProduct;
+export default EditProduct;
