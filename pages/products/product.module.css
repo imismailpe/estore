@@ -31,4 +31,17 @@
     margin: 0;
     padding: 5px;
 }
-
+.priceSection{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.priceMRP{
+    text-decoration: line-through;
+    color: rgb(128, 128, 128);
+    font-size: 0.8em;
+}
+.priceSelling{
+    color: #000;
+    font-weight: 600;
+}

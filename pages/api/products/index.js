@@ -25,7 +25,8 @@ export default async function handler(req, res) {
             cost: req.body.cost,
             sellingPrice: req.body.sellingPrice,
             mrp: req.body.mrp,
-            quantity: req.body.quantity
+            quantity: req.body.quantity,
+            category: req.body.category
         }
         const dbResult = await insertDocument('products', newProduct);
         res.status(201).json(dbResult);
@@ -36,7 +37,8 @@ export default async function handler(req, res) {
             cost: req.body.cost,
             sellingPrice: req.body.sellingPrice,
             mrp: req.body.mrp,
-            quantity: req.body.quantity
+            quantity: req.body.quantity,
+            category: req.body.category
         }
         const dbResult = await updateDocument('products', req.body._id, updatedProduct);
         res.status(201).json(dbResult);

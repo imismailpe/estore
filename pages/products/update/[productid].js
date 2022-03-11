@@ -24,6 +24,7 @@ const EditProduct = () => {
             productQuantiryRef.current.value = data[0].quantity;
             productCostRef.current.value = data[0].cost;
             productSellingpriceRef.current.value = data[0].sellingPrice;
+            productCategoryRef.current.value = data[0].category;
         }
         setloading(false);
     }

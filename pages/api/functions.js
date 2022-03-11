@@ -49,7 +49,6 @@ export async function deleteDocument(collection, id) {
         const db = client.db();
         const result = await db.collection(collection).deleteOne({ _id: ObjectId(id) });
         client.close();
-        console.log(collection, id,result)
         return { "success": true, "message": `${result.deletedCount} document(s) deleted successfully` };
     }
     catch (e) {
