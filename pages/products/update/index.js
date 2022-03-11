@@ -48,7 +48,7 @@ const UpdateProduct = () => {
                                     <Link className={styles.editButton}
                                         href={{
                                             pathname: `/products/update/[productid]`,
-                                            query: { productId: product._id }
+                                            query: { productid: product._id }
                                         }}
                                     >Edit</Link>
                                 </div>

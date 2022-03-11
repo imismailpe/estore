@@ -5,7 +5,7 @@ import styles from '../index.module.css';
 
 const EditProduct = () => {
     const router = useRouter();
-    const productId = router.query.productId;
+    const productId = router.query.productid;
     const productNameRef = useRef(null);
     const productMrpRef = useRef(null);
     const productCostRef = useRef(null);
