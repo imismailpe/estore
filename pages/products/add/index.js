@@ -20,6 +20,14 @@ const AddProduct = () => {
     }
     useEffect(() => {
         fetchCategories();
+        return () => {
+            productNameRef.current = null;
+            productMrpRef.current = null;
+            productQuantiryRef.current = null;
+            productCostRef.current = null;
+            productSellingpriceRef.current = null;
+            productCategoryRef.current = null;
+        }
     }, []);
     const submitNewProduct = async (product) => {
         const result = await submitProduct(product);
@@ -47,10 +55,6 @@ const AddProduct = () => {
             const result = await submitNewProduct(newProduct);
             if (result.ok) {
                 productNameRef.current.value = '';
-                productMrpRef.current.value = 1;
-                productQuantiryRef.current.value = 1;
-                productCostRef.current.value = 1;
-                productSellingpriceRef.current.value = 1;
             }
             const resp = await result.json();
             setresult(resp.message);

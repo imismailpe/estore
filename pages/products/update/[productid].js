@@ -25,6 +25,7 @@ const EditProduct = () => {
             productCostRef.current.value = data[0].cost;
             productSellingpriceRef.current.value = data[0].sellingPrice;
             productCategoryRef.current.value = data[0].category;
+            console.log(data[0].category)
         }
         setloading(false);
     }
@@ -39,6 +40,14 @@ const EditProduct = () => {
         if (productId) {
             fetchProductToUpdate();
             fetchCategories();
+        }
+        return () => {
+            productNameRef.current = null;
+            productMrpRef.current = null;
+            productQuantiryRef.current = null;
+            productCostRef.current = null;
+            productSellingpriceRef.current = null;
+            productCategoryRef.current = null;
         }
     }, []);
     const handleProductUpdate = async (product) => {
