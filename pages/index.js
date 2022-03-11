@@ -29,10 +29,10 @@ export default function Home() {
               <p>Add products to store</p>
             </a>
           </Link>
-          <Link href='/categories/add' >
+          <Link href='/categories' >
             <a className={styles.card}>
-              <h2>Add Category &rarr;</h2>
-              <p>Add categories of products</p>
+              <h2>Manage Category &rarr;</h2>
+              <p>Add/Delete categories of products</p>
             </a>
           </Link>
           <Link href={'/products'}>
@@ -45,12 +45,6 @@ export default function Home() {
             <a className={styles.card}>
               <h2>Update Products &rarr;</h2>
               <p>Update/Delete products</p>
-            </a>
-          </Link>
-          <Link href={'/categories/update'}>
-            <a className={styles.card}>
-              <h2>Update Categories &rarr;</h2>
-              <p>Update/Delete categories</p>
             </a>
           </Link>
         </div>
