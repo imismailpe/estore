@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react"
-import { fetchData, submitProduct } from "../../../utils/functions";
+import { fetchData, submitProduct, submitProductUpdate } from "../../../utils/functions";
 import styles from '../index.module.css';
 
 const EditProduct = () => {
@@ -15,17 +15,16 @@ const EditProduct = () => {
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);
-    const [productlist, setproductlist] = useState([]);
-    const fetchProducts = async () => {
+    const fetchProductToUpdate = async () => {
         setloading(true);
-        setproductlist([]);
         const data = await fetchData('/api/products/' + productId);
-        setproductlist(data);
-        productNameRef.current.value = '';
-        productMrpRef.current.value = 1;
-        productQuantiryRef.current.value = 1;
-        productCostRef.current.value = 1;
-        productSellingpriceRef.current.value = 1;
+        if (data.length > 0) {
+            productNameRef.current.value = data[0].name;
+            productMrpRef.current.value = data[0].mrp;
+            productQuantiryRef.current.value = data[0].quantity;
+            productCostRef.current.value = data[0].cost;
+            productSellingpriceRef.current.value = data[0].sellingPrice;
+        }
         setloading(false);
     }
 
@@ -36,11 +35,13 @@ const EditProduct = () => {
         setloading(false);
     }
     useEffect(() => {
-        fetchProducts();
-        fetchCategories();
+        if(productId){
+            fetchProductToUpdate();
+            fetchCategories();    
+        }
     }, []);
-    const submitProductUpdate = async (product) => {
-        const result = await submitProduct(product);
+    const handleProductUpdate = async (product) => {
+        const result = await submitProductUpdate(product);
         return result;
     }
     const handleSubmission = async (event) => {
@@ -55,6 +56,7 @@ const EditProduct = () => {
             setloading(true);
             setresult('');
             const updatedProduct = {
+                _id: productId,
                 name,
                 mrp,
                 category,
@@ -62,18 +64,9 @@ const EditProduct = () => {
                 cost,
                 sellingPrice
             }
-            const result = await submitProductUpdate(updatedProduct);
-            if (result.ok) {
-                productNameRef.current.value = '';
-                productMrpRef.current.value = 1;
-                productQuantiryRef.current.value = 1;
-                productCostRef.current.value = 1;
-                productSellingpriceRef.current.value = 1;
-                setresult('Updated product successfully.');
-            }
-            else{
-                setresult(result.error);
-            }
+            const result = await handleProductUpdate(updatedProduct);
+            const resp = await result.json();
+            setresult(resp.message);
             setloading(false);
         }
     }
@@ -90,7 +83,7 @@ const EditProduct = () => {
                     <label htmlFor="productcategory">Category</label>
                     <select name="productcategory" ref={productCategoryRef} className={styles.productCategorySelect}>
                         {
-                            categorylist.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
+                            categorylist.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
                         }
                     </select>
                 </div>

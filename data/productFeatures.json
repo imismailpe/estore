@@ -1,13 +1,13 @@
 [
     {
-        "id": 1,
+        "_id": 1,
         "productId": 1,
         "author": "Abbas TP",
         "isbn": 87990220,
         "publisher": "University of Calicut"
     },
     {
-        "id": 2,
+        "_id": 2,
         "productId": 2,
         "manufacturer": "Anchor",
         "mfgdata": "20/11/2021",

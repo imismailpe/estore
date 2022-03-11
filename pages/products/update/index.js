@@ -20,15 +20,11 @@ const UpdateProduct = () => {
         setloading(true);
         setresult('');
         const productToDelete = {
-            id: productId
+            "_id": productId
         }
         const result = await submitProductDeletion(productToDelete);
-        if (result.ok) {
-            setresult('Deleted successfully');
-        }
-        else {
-            setresult(result.error);
-        }
+        const resp = await result.json();
+        setresult(resp.message);
         fetchProducts();
     }
     useEffect(() => {
@@ -40,20 +36,21 @@ const UpdateProduct = () => {
             <div className={styles.productGrid}>
                 {
                     loading ? 'Loading..'
-                        : productlist.map(product => {
-                            return <div key={product._id} className={styles.deleteSection} style={{ position: 'relative' }}>
-                                <ProductView product={product} />
-                                <div className={styles.deleteButton}>
-                                    <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
-                                    <Link className={styles.editButton}
-                                        href={{
-                                            pathname: `/products/update/[productid]`,
-                                            query: { productid: product._id }
-                                        }}
-                                    >Edit</Link>
+                        : productlist.length === 0 ? <div>No Products yet</div>
+                            : productlist.map(product => {
+                                return <div key={product._id} className={styles.deleteSection} style={{ position: 'relative' }}>
+                                    <ProductView product={product} />
+                                    <div className={styles.deleteButton}>
+                                        <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
+                                        <Link className={styles.editButton}
+                                            href={{
+                                                pathname: `/products/update/[productid]`,
+                                                query: { productid: product._id }
+                                            }}
+                                        >Edit</Link>
+                                    </div>
                                 </div>
-                            </div>
-                        })
+                            })
                 }
             </div>
         </Fragment>

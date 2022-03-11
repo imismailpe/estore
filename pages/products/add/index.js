@@ -51,11 +51,9 @@ const AddProduct = () => {
                 productQuantiryRef.current.value = 1;
                 productCostRef.current.value = 1;
                 productSellingpriceRef.current.value = 1;
-                setresult('Added product successfully.');
             }
-            else{
-                setresult(result.error);
-            }
+            const resp = await result.json();
+            setresult(resp.message);
             setloading(false);
         }
     }
@@ -72,7 +70,7 @@ const AddProduct = () => {
                     <label htmlFor="productcategory">Category</label>
                     <select name="productcategory" ref={productCategoryRef} className={styles.productCategorySelect}>
                         {
-                            categorylist.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
+                            categorylist.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
                         }
                     </select>
                 </div>
