@@ -75,11 +75,11 @@ const EditProduct = () => {
             <h4>Update a product</h4>
             <p>{result}</p>
             <form onSubmit={handleSubmission} className={styles.addProductForm}>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productname">Name</label>
                     <input name="productname" type="text" ref={productNameRef} />
                 </div>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productcategory">Category</label>
                     <select name="productcategory" ref={productCategoryRef} className={styles.productCategorySelect}>
                         {
@@ -87,19 +87,19 @@ const EditProduct = () => {
                         }
                     </select>
                 </div>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productcost">Cost</label>
                     <input name="productcost" type="number" ref={productCostRef} />
                 </div>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productsellingprice">Selling price</label>
                     <input name="productsellingprice" type="number" ref={productSellingpriceRef} />
                 </div>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productmrp">MRP</label>
                     <input name="productmrp" type="number" ref={productMrpRef} />
                 </div>
-                <div>
+                <div className={styles.inputSection}>
                     <label htmlFor="productqty">Quantity</label>
                     <input name="productqty" type="number" ref={productQuantiryRef} />
                 </div>

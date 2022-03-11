@@ -13,7 +13,6 @@ export async function getAllDocuments(collection, sort, filter = {}) {
         return { "success": true, data: documents };
     }
     catch (e) {
-        client.close();
         console.log("error connecting db", e);
         return { "success": false, "message": `${e}` };
     }

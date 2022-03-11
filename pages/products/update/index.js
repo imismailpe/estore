@@ -36,8 +36,8 @@ const UpdateProduct = () => {
             <div className={styles.productGrid}>
                 {
                     loading ? 'Loading..'
-                        : productlist.length === 0 ? <div>No Products yet</div>
-                            : productlist.map(product => {
+                        : productlist && productlist.length === 0 ? <div>No Products yet</div>
+                            : productlist && productlist.map(product => {
                                 return <div key={product._id} className={styles.deleteSection} style={{ position: 'relative' }}>
                                     <ProductView product={product} />
                                     <div className={styles.deleteButton}>
