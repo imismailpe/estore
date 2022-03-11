@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react"
-import { fetchData, submitProduct, submitProductUpdate } from "../../../utils/functions";
+import { fetchData, submitProductUpdate } from "../../../utils/functions";
 import styles from '../index.module.css';
 
 const EditProduct = () => {
@@ -36,9 +36,9 @@ const EditProduct = () => {
         setloading(false);
     }
     useEffect(() => {
-        if(productId){
+        if (productId) {
             fetchProductToUpdate();
-            fetchCategories();    
+            fetchCategories();
         }
     }, []);
     const handleProductUpdate = async (product) => {
@@ -74,7 +74,7 @@ const EditProduct = () => {
     return (
         <div>
             <h4>Update a product</h4>
-            <p>{result}</p>
+            <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
             <form onSubmit={handleSubmission} className={styles.addProductForm}>
                 <div className={styles.inputSection}>
                     <label htmlFor="productname">Name</label>

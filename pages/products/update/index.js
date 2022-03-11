@@ -38,18 +38,16 @@ const UpdateProduct = () => {
                     loading ? 'Loading..'
                         : productlist && productlist.length === 0 ? <div>No Products yet</div>
                             : productlist && productlist.map(product => {
-                                return <div key={product._id} className={styles.deleteSection} style={{ position: 'relative' }}>
+                                return <div key={product._id} className={styles.deleteSection}>
                                     <ProductView product={product} />
-                                    <div className={styles.deleteButton}>
-                                        <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
-                                    </div>
-                                    <div className={styles.editButton}>
+                                    <button className={styles.deleteButton} onClick={(e) => deleteProductId(product._id)}>Delete</button>
+                                    <button className={styles.editButton}>
                                         <Link href={{
                                             pathname: `/products/update/[productid]`,
                                             query: { productid: product._id }
                                         }}
                                         >Edit</Link>
-                                    </div>
+                                    </button>
                                 </div>
                             })
                 }
