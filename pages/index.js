@@ -35,10 +35,10 @@ export default function Home() {
               <p>View available products</p>
             </a>
           </Link>
-          <Link href={'/products/delete'}>
+          <Link href={'/products/update'}>
             <a className={styles.card}>
-              <h2>Delete Products &rarr;</h2>
-              <p>Delete products</p>
+              <h2>Update Products &rarr;</h2>
+              <p>Update/Delete products</p>
             </a>
           </Link>
         </div>
