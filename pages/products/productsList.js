@@ -8,7 +8,7 @@ const ProductList = ({ list = [] }) => {
     }
     return (
         list.map(product => {
-            return <ProductView key={product.id} product={product} />
+            return <ProductView key={product._id} product={product} />
         })
     )
 }

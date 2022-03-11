@@ -15,11 +15,11 @@ const DeleteProduct = () => {
         setproductlist(data);
         setloading(false);
     }
-    const deleteProductId = async (product) => {
+    const deleteProductId = async (productId) => {
         setloading(true);
         setresult('');
         const productToDelete = {
-            id: product
+            id: productId
         }
         const result = await submitProductDeletion(productToDelete);
         if (result.ok) {
@@ -40,10 +40,10 @@ const DeleteProduct = () => {
                 {
                     loading ? 'Loading..'
                         : productlist.map(product => {
-                            return <div key={product.id} className={styles.deleteSection} style={{ position: 'relative' }}>
+                            return <div key={product._id} className={styles.deleteSection} style={{ position: 'relative' }}>
                                 <ProductView product={product} />
                                 <div className={styles.deleteButton}>
-                                    <button onClick={(e) => deleteProductId(product.id)}>Delete</button>
+                                    <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
                                 </div>
                             </div>
                         })
