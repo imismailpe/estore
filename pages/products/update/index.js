@@ -26,7 +26,7 @@ const UpdateProduct = () => {
         if (result.ok) {
             setresult('Deleted successfully');
         }
-        else{
+        else {
             setresult(result.error);
         }
         fetchProducts();
@@ -45,7 +45,7 @@ const UpdateProduct = () => {
                                 <ProductView product={product} />
                                 <div className={styles.deleteButton}>
                                     <button onClick={(e) => deleteProductId(product._id)}>Delete</button>
-                                    <Link href='/update/[productid]'>Edit</Link>
+                                    <Link className={styles.editButton} href={{ pathname: '/update/[productid]', query: { productId: product._id } }}>Edit</Link>
                                 </div>
                             </div>
                         })

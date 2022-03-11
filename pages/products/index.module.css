@@ -12,8 +12,13 @@
 .deleteButton{
     position: absolute;
     bottom: 3px;
-    width: 100%;
+    left: 5px;
     text-align: center;
+}
+.editButton{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
 }
 .addProductForm{
     display: grid;
