@@ -56,7 +56,7 @@ export const submitCategoryDeletion = async (data) => {
 }
 export const getProductOptionObject = () => {
     return {
-        id: self.crypto.randomUUID(),
+        id: crypto.randomUUID(),
         sku: 'ABC',
         cost: 90,
         sellingPrice: 95,
