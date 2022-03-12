@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from 'uuid';
 export const fetchData = async (url) => {
     const result = await fetch(url);
     const resp = await result.json();
@@ -56,7 +56,7 @@ export const submitCategoryDeletion = async (data) => {
 }
 export const getProductOptionObject = () => {
     return {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         sku: 'ABC',
         cost: 90,
         sellingPrice: 95,
