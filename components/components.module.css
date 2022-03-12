@@ -77,17 +77,14 @@
 }
 .productGrid{
     display: grid;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: flex-start;
-    grid-template-columns: repeat(auto-fit, 200px);
-    gap: 4px;
-    margin: 3px;
+    grid-template-columns: repeat(auto-fit, 180px);
 }
 .product{
     display: grid;
     border: 1px solid rgb(189, 188, 188);
-    padding: 3px;
-    margin: 2px;
+    padding: 2px;
     background-color: rgb(240, 236, 232);
     align-items: flex-start;
     justify-content: center;
@@ -135,4 +132,22 @@
 .priceSelling{
     color: #000;
     font-weight: 600;
+}
+.productDetailsContainer{
+    margin: 3px;
+    border: 1px solid rgb(223, 223, 223);
+    padding: 5px;
+    display: grid;
+    gap: 5px;
+}
+.featureName{
+    display: flex;
+    margin: 3px;
+    gap: 5px;
+}
+.featureValue{
+    border: 1px solid rgb(206, 206, 206);
+    padding: 3px;
+    border-radius: 3px;
+    background-color: rgb(226, 241, 255);
 }

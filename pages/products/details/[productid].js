@@ -48,7 +48,7 @@ const ProductDetails = (props) => {
         getOptions(productData);
     }, [productData]);
     return (
-        <div className={styles.productDetails}>
+        <div className={styles.productDetailsContainer}>
             <p>{loading ? 'Loading..' : ''}</p>
             <h4>{productData.name}</h4>
             <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
