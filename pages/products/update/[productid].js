@@ -1,31 +1,49 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react"
-import { fetchData, submitProductUpdate } from "../../../utils/functions";
-import styles from '../index.module.css';
+import { useEffect, useState } from "react"
+import ProductForm from "../../../components/productForm";
+import { fetchData, getProductOptionObject, submitProductUpdate } from "../../../utils/functions";
 
 const EditProduct = () => {
     const router = useRouter();
     const productId = router.query.productid;
-    const productNameRef = useRef(null);
-    const productMrpRef = useRef(null);
-    const productCostRef = useRef(null);
-    const productSellingpriceRef = useRef(null);
-    const productCategoryRef = useRef(null);
-    const productQuantiryRef = useRef(null);
+    const [productName, setproductName] = useState('');
+    const [productCategory, setproductCategory] = useState('');
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
-    const [categorylist, setcategorylist] = useState([]);
+    const [categorylist, setcategorylist] = useState([]);    
+    const [productData, setProductData] = useState({
+        name: '',
+        category: '',
+        options: []
+    });
+    const saveProductOptionValues = (id, field, value) => {
+        let data = { ...productData };
+        const editedOptionPosition = data.options.findIndex(item => item.id === id);
+        let editedOption = data.options[editedOptionPosition];
+        editedOption[field] = value;
+        data.options.splice(editedOptionPosition, 1, editedOption);
+        setProductData(data);
+    }
+    const removeProductOption = (id) => {
+        if (productData.options.length > 1) {
+            let data = { ...productData };
+            data.options = data.options.filter(item => item.id !== id);
+            setProductData(data);
+        }
+    }
+    const addNewProductOption = () => {
+        const newOption = getProductOptionObject();
+        let data = { ...productData };
+        data.options.push(newOption);
+        setProductData(data);
+    }
     const fetchProductToUpdate = async () => {
         setloading(true);
         const data = await fetchData('/api/products/' + productId);
         if (data.length > 0) {
-            productNameRef.current.value = data[0].name;
-            productMrpRef.current.value = data[0].mrp;
-            productQuantiryRef.current.value = data[0].quantity;
-            productCostRef.current.value = data[0].cost;
-            productSellingpriceRef.current.value = data[0].sellingPrice;
-            productCategoryRef.current.value = data[0].category;
-            console.log(data[0].category)
+            setProductData(data[0]);
+            setproductCategory(data[0].category);
+            setproductName(data[0].name);
         }
         setloading(false);
     }
@@ -41,38 +59,23 @@ const EditProduct = () => {
             fetchProductToUpdate();
             fetchCategories();
         }
-        return () => {
-            productNameRef.current = null;
-            productMrpRef.current = null;
-            productQuantiryRef.current = null;
-            productCostRef.current = null;
-            productSellingpriceRef.current = null;
-            productCategoryRef.current = null;
-        }
     }, []);
     const handleProductUpdate = async (product) => {
+        console.log("product", product)
         const result = await submitProductUpdate(product);
         return result;
     }
-    const handleSubmission = async (event) => {
-        event.preventDefault();
-        const name = productNameRef.current.value;
-        const mrp = productMrpRef.current.value;
-        const category = productCategoryRef.current.value;
-        const quantity = productQuantiryRef.current.value;
-        const cost = productCostRef.current.value;
-        const sellingPrice = productSellingpriceRef.current.value;
-        if (name && mrp && category && quantity && sellingPrice && cost) {
+    const handleSubmission = async () => {
+        const name = productName;
+        const category = productCategory;
+        if (name && category) {
             setloading(true);
             setresult('');
             const updatedProduct = {
                 _id: productId,
                 name,
-                mrp,
                 category,
-                quantity,
-                cost,
-                sellingPrice
+                options: [...productData.options]
             }
             const result = await handleProductUpdate(updatedProduct);
             const resp = await result.json();
@@ -84,37 +87,19 @@ const EditProduct = () => {
         <div>
             <h4>Update a product</h4>
             <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
-            <form onSubmit={handleSubmission} className={styles.addProductForm}>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productname">Name</label>
-                    <input name="productname" type="text" ref={productNameRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productcategory">Category</label>
-                    <select name="productcategory" ref={productCategoryRef} className={styles.productCategorySelect}>
-                        {
-                            categorylist.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
-                        }
-                    </select>
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productcost">Cost</label>
-                    <input name="productcost" type="number" ref={productCostRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productsellingprice">Selling price</label>
-                    <input name="productsellingprice" type="number" ref={productSellingpriceRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productmrp">MRP</label>
-                    <input name="productmrp" type="number" ref={productMrpRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productqty">Quantity</label>
-                    <input name="productqty" type="number" ref={productQuantiryRef} />
-                </div>
-                <input type="submit" disabled={loading} />
-            </form>
+            <ProductForm
+                loading={loading}
+                productName={productName}
+                setproductName={setproductName}
+                productCategory={productCategory}
+                setproductCategory={setproductCategory}
+                categorylist={categorylist}
+                productData={productData}
+                addNewProductOption={addNewProductOption}
+                removeProductOption={removeProductOption}
+                saveProductOptionValues={saveProductOptionValues}
+                handleSubmission={handleSubmission}
+            />
         </div>
     )
 }

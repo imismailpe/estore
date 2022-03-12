@@ -22,11 +22,8 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const newProduct = {
             name: req.body.name,
-            cost: req.body.cost,
-            sellingPrice: req.body.sellingPrice,
-            mrp: req.body.mrp,
-            quantity: req.body.quantity,
-            category: req.body.category
+            category: req.body.category,
+            options: req.body.options
         }
         const dbResult = await insertDocument('products', newProduct);
         res.status(201).json(dbResult);
@@ -34,11 +31,8 @@ export default async function handler(req, res) {
     if (req.method === 'PUT') {
         const updatedProduct = {
             name: req.body.name,
-            cost: req.body.cost,
-            sellingPrice: req.body.sellingPrice,
-            mrp: req.body.mrp,
-            quantity: req.body.quantity,
-            category: req.body.category
+            category: req.body.category,
+            options: req.body.options
         }
         const dbResult = await updateDocument('products', req.body._id, updatedProduct);
         res.status(201).json(dbResult);

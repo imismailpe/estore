@@ -10,8 +10,8 @@ const ProductView = ({ product = {} }) => {
             <div className={styles.productDetails}>
                 <h4 className={styles.productName}>{product.name}</h4>
                 <div className={styles.priceSection}>
-                    <span className={styles.priceMRP}>Rs.{product.mrp}</span>
-                    <span className={styles.priceSellingP}>Rs.{product.sellingPrice}</span>
+                    <span className={styles.priceMRP}>Rs.{product.options[0].mrp}</span>
+                    <span className={styles.priceSellingP}>Rs.{product.options[0].sellingPrice}</span>
                 </div>
             </div>
         </div>

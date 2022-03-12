@@ -14,3 +14,25 @@
     border-radius: 3px;
     margin: 3px 0;
 }
+.addProductForm{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid rgb(133, 133, 133);
+}
+.productCategorySelect{
+    min-width: 150px;
+}
+.inputSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+.submitButton{
+    
+}

@@ -54,3 +54,14 @@ export const submitCategoryDeletion = async (data) => {
     });
     return result;
 }
+export const getProductOptionObject = () => {
+    return {
+        id: self.crypto.randomUUID(),
+        sku: 'ABC',
+        cost: 90,
+        sellingPrice: 95,
+        mrp: 100,
+        quantity: 1,
+        colour: ''
+    }
+}
