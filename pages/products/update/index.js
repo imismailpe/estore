@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import ProductView from "../../../components/product";
 import { fetchData, submitProductDeletion } from "../../../utils/functions";
-import styles from '../index.module.css';
+import styles from '../../../components/components.module.css';
 
 const UpdateProduct = () => {
     const [productlist, setproductlist] = useState([]);

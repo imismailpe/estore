@@ -11,7 +11,7 @@ const ProductView = ({ product = {} }) => {
             query: { productid: product._id }
         }}>
             <div className={styles.product}>
-                <div className={styles.productCover}><Image src={`https://picsum.photos/150/150?${product._id}`} width={150} height={150} /></div>
+                <Image src={`https://picsum.photos/180/180?${product._id}`} width={150} height={150} />
                 <div className={styles.productDetails}>
                     <h4 className={styles.productName}>{product.name}</h4>
                     <div className={styles.priceSection}>
