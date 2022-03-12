@@ -38,7 +38,7 @@
 }
 .deleteSection{
     position: relative;
-    min-height: 200px;
+    min-height: 220px;
     background-color: rgb(248, 194, 194);
 }
 .deleteButton{
@@ -87,7 +87,7 @@
     display: grid;
     border: 1px solid rgb(189, 188, 188);
     padding: 3px;
-    margin: 4px;
+    margin: 2px;
     background-color: rgb(240, 236, 232);
     align-items: flex-start;
     justify-content: center;
