@@ -69,7 +69,7 @@ const AddProduct = () => {
     return (
         <div>
             <h4>Add a product</h4>
-            <p>{result}</p>
+            <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
             <ProductForm
                 loading={loading}
                 saveProductName={saveProductName}
