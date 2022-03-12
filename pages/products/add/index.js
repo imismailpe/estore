@@ -1,17 +1,50 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
+import ProductOptions from "../../../components/productOptions";
 import { fetchData, submitProduct } from "../../../utils/functions";
 import styles from '../index.module.css';
 
 const AddProduct = () => {
     const productNameRef = useRef(null);
-    const productMrpRef = useRef(null);
-    const productCostRef = useRef(null);
-    const productSellingpriceRef = useRef(null);
     const productCategoryRef = useRef(null);
-    const productQuantiryRef = useRef(null);
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);
+    const [productData, setProductData] = useState({
+        name: '',
+        category: '',
+        options: []
+    });
+    const getProductOptionObject = () => {
+        return {
+            id: crypto.randomUUID(),
+            sku: 'ABC',
+            cost: 90,
+            sellingPrice: 95,
+            mrp: 100,
+            quantity: 1
+        }
+    }
+    const saveProductOptionValues = (values) => {
+        let data = { ...productData };
+        const optionExists = data.options.some(item => item.id === values.id);
+        if (optionExists) {
+            const existingOptionPosition = data.options.findIndex(item => item.id === values.id);
+            data.options.splice(existingOptionPosition, 1, values);
+        }
+        else {
+            data.options.push(values);
+        }
+        setProductData(data);
+    }
+    const removeProductOption = (id) => {
+        let data = { ...productData };
+        data.options = data.options.filter(item => item.id !== id);
+        setProductData(data);
+    }
+    const addNewProductOption = () => {
+        const newOption = getProductOptionObject();
+        saveProductOptionValues(newOption);
+    }
     const fetchCategories = async () => {
         setloading(true);
         const categories = await fetchData('/api/categories');
@@ -22,10 +55,6 @@ const AddProduct = () => {
         fetchCategories();
         return () => {
             productNameRef.current = null;
-            productMrpRef.current = null;
-            productQuantiryRef.current = null;
-            productCostRef.current = null;
-            productSellingpriceRef.current = null;
             productCategoryRef.current = null;
         }
     }, []);
@@ -33,25 +62,19 @@ const AddProduct = () => {
         const result = await submitProduct(product);
         return result;
     }
-    const handleSubmission = async (event) => {
-        event.preventDefault();
+    const handleSubmission = async () => {
+        console.log(" handleSubmission event ")
         const name = productNameRef.current.value;
-        const mrp = productMrpRef.current.value;
         const category = productCategoryRef.current.value;
-        const quantity = productQuantiryRef.current.value;
-        const cost = productCostRef.current.value;
-        const sellingPrice = productSellingpriceRef.current.value;
-        if (name && mrp && category && quantity && sellingPrice && cost) {
+        if (name && category) {
             setloading(true);
             setresult('');
             const newProduct = {
                 name,
-                mrp,
                 category,
-                quantity,
-                cost,
-                sellingPrice
+                options: [...productData.options]
             }
+            console.log("submitting", newProduct);
             const result = await submitNewProduct(newProduct);
             if (result.ok) {
                 productNameRef.current.value = '';
@@ -65,7 +88,7 @@ const AddProduct = () => {
         <div>
             <h4>Add a product</h4>
             <p>{result}</p>
-            <form onSubmit={handleSubmission} className={styles.addProductForm}>
+            <div className={styles.addProductForm}>
                 <div className={styles.inputSection}>
                     <label htmlFor="productname">Name</label>
                     <input name="productname" type="text" ref={productNameRef} />
@@ -78,24 +101,12 @@ const AddProduct = () => {
                         }
                     </select>
                 </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productcost">Cost</label>
-                    <input name="productcost" type="number" ref={productCostRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productsellingprice">Selling price</label>
-                    <input name="productsellingprice" type="number" ref={productSellingpriceRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productmrp">MRP</label>
-                    <input name="productmrp" type="number" ref={productMrpRef} />
-                </div>
-                <div className={styles.inputSection}>
-                    <label htmlFor="productqty">Quantity</label>
-                    <input name="productqty" type="number" ref={productQuantiryRef} />
-                </div>
-                <input type="submit" disabled={loading} />
-            </form>
+                <button className={styles.submitButton} disabled={loading} onClick={handleSubmission}>Submit</button>
+                <div>Add product options <button onClick={addNewProductOption}> + </button></div>
+                {
+                    productData.options.map(item => <ProductOptions key={item.id} id={item.id} removeProductOption={removeProductOption} saveProductOptionValues={saveProductOptionValues} />)
+                }
+            </div>
         </div>
     )
 }

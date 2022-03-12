@@ -28,10 +28,10 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    border: 1px solid rgb(201, 200, 200);
     border-radius: 4px;
     padding: 5px;
     margin: 5px;
+    border: 2px solid rgb(133, 133, 133);
 }
 .productCategorySelect{
     min-width: 150px;
@@ -40,4 +40,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.submitButton{
+    
 }
