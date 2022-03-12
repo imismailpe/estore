@@ -68,7 +68,7 @@ const AddCategory = () => {
                     loading ? 'Loading..'
                         : categorylist && categorylist.length === 0 ? <div>No Categories yet</div>
                             : categorylist && categorylist.map(category => {
-                                return <div key={category._id} className={styles.deleteSection} style={{ position: 'relative' }}>
+                                return <div key={category._id} className={styles.deleteCategorySection} style={{ position: 'relative' }}>
                                     <div className={styles.categoryName}>{category.name}</div>
                                     <div className={styles.deleteButton}>
                                         <button onClick={(e) => deleteCategoryId(category._id)}>Delete</button>
