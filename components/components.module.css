@@ -86,17 +86,17 @@
 .product{
     display: grid;
     border: 1px solid rgb(189, 188, 188);
-    padding: 5px;
+    padding: 3px;
     margin: 4px;
     background-color: rgb(240, 236, 232);
     align-items: flex-start;
     justify-content: center;
     grid-template-rows: 145px;
     grid-template-columns: 1fr;
-    height: 100%;
     position: relative;
     cursor: pointer;
     border-radius: 3px;
+    min-height: 190px;
 }
 .productDetails{
     position: absolute;
