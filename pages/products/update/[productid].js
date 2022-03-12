@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 import ProductForm from "../../../components/productForm";
 import { fetchData, getProductOptionObject, submitProductUpdate } from "../../../utils/functions";
+import styles from '../../../components/components.module.css';
 
 const EditProduct = () => {
     const router = useRouter();

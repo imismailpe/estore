@@ -17,6 +17,7 @@ const ProductForm = (props) => {
                 </select>
             </div>
             <div className={styles.inputSection}>Product options <button onClick={props.addNewProductOption}> Add </button></div>
+            <div className={styles.productOptionsContainer}>
             {
                 props.productData.options.map(item => <ProductOptions key={item.id}
                     product={item}
@@ -24,6 +25,7 @@ const ProductForm = (props) => {
                     saveProductOptionValues={props.saveProductOptionValues}
                 />)
             }
+            </div>
             <div className={styles.inputSection}><button className={styles.submitButton} disabled={props.loading} onClick={props.handleSubmission}>Submit</button></div>
         </div>
     )

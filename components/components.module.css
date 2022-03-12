@@ -15,6 +15,7 @@
     margin: 3px 0;
 }
 .addProductForm{
+    position: relative;
     display: grid;
     justify-content: center;
     align-items: center;
@@ -152,4 +153,11 @@
     padding: 3px;
     border-radius: 3px;
     background-color: rgb(226, 241, 255);
+}
+.productOptionsContainer{
+    border: 1px solid rgb(216, 216, 216);
+    max-height: 85vh;
+    position: sticky;
+    top: 0;
+    overflow: auto;
 }
