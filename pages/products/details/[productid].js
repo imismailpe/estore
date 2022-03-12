@@ -51,7 +51,7 @@ const ProductDetails = (props) => {
         <div className={styles.productDetails}>
             <p>{loading ? 'Loading..' : ''}</p>
             <h4>{productData.name}</h4>
-            <Image src={`https://picsum.photos/400/400?${productData._id}`} width={400} height={400} />
+            <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
             <div>Rs.{productData.options && productData.options.length > 1 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:
                 <div className={styles.featureName}>Colours:
