@@ -70,7 +70,9 @@ const AddCategory = () => {
                             : categorylist && categorylist.map(category => {
                                 return <div key={category._id} className={styles.deleteCategorySection}>
                                     <div>{category.name}</div>
-                                    <button onClick={(e) => deleteCategoryId(category._id)}>Delete</button>
+                                    <div>
+                                        <button onClick={(e) => deleteCategoryId(category._id)}>Delete</button>
+                                    </div>
                                 </div>
                             })
                 }
