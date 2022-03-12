@@ -6,11 +6,11 @@ const ProductForm = (props) => {
         <div className={styles.addProductForm}>
             <div className={styles.inputSection}>
                 <label htmlFor="productname">Name</label>
-                <input name="productname" type="text" value={props.productName} onChange={e => props.setproductName(e.target.value)} />
+                <input name="productname" type="text" value={props.productData.name} onChange={e => props.saveProductName(e.target.value)} />
             </div>
             <div className={styles.inputSection}>
                 <label htmlFor="productcategory">Category</label>
-                <select name="productcategory" value={props.productCategory} onChange={e => props.setproductCategory(e.target.value)} className={styles.productCategorySelect}>
+                <select name="productcategory" value={props.productData.category} onChange={e => props.saveProductCategory(e.target.value)} className={styles.productCategorySelect}>
                     {
                         props.categorylist.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
                     }

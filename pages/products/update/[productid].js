@@ -6,8 +6,6 @@ import { fetchData, getProductOptionObject, submitProductUpdate } from "../../..
 const EditProduct = () => {
     const router = useRouter();
     const productId = router.query.productid;
-    const [productName, setproductName] = useState('');
-    const [productCategory, setproductCategory] = useState('');
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);    
@@ -16,6 +14,16 @@ const EditProduct = () => {
         category: '',
         options: []
     });
+    const saveProductName = (value) => {
+        let data = {...productData};
+        data.name = value;
+        setProductData(data);
+    }
+    const saveProductCategory = (value) => {
+        let data = {...productData};
+        data.category = value;
+        setProductData(data);
+    }
     const saveProductOptionValues = (id, field, value) => {
         let data = { ...productData };
         const editedOptionPosition = data.options.findIndex(item => item.id === id);
@@ -42,8 +50,6 @@ const EditProduct = () => {
         const data = await fetchData('/api/products/' + productId);
         if (data.length > 0) {
             setProductData(data[0]);
-            setproductCategory(data[0].category);
-            setproductName(data[0].name);
         }
         setloading(false);
     }
@@ -61,23 +67,14 @@ const EditProduct = () => {
         }
     }, []);
     const handleProductUpdate = async (product) => {
-        console.log("product", product)
         const result = await submitProductUpdate(product);
         return result;
     }
     const handleSubmission = async () => {
-        const name = productName;
-        const category = productCategory;
-        if (name && category) {
+        if (productData.name && productData.category) {
             setloading(true);
             setresult('');
-            const updatedProduct = {
-                _id: productId,
-                name,
-                category,
-                options: [...productData.options]
-            }
-            const result = await handleProductUpdate(updatedProduct);
+            const result = await handleProductUpdate(productData);
             const resp = await result.json();
             setresult(resp.message);
             setloading(false);
@@ -89,10 +86,8 @@ const EditProduct = () => {
             <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
             <ProductForm
                 loading={loading}
-                productName={productName}
-                setproductName={setproductName}
-                productCategory={productCategory}
-                setproductCategory={setproductCategory}
+                saveProductName={saveProductName}
+                saveProductCategory={saveProductCategory}
                 categorylist={categorylist}
                 productData={productData}
                 addNewProductOption={addNewProductOption}

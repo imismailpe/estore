@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import ProductForm from "../../../components/productForm";
 import { fetchData, getProductOptionObject, submitProduct } from "../../../utils/functions";
 const AddProduct = () => {
-    const [productName, setproductName] = useState('');
-    const [productCategory, setproductCategory] = useState('');
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);
@@ -12,6 +10,16 @@ const AddProduct = () => {
         category: '',
         options: [getProductOptionObject()]
     });
+    const saveProductName = (value) => {
+        let data = {...productData};
+        data.name = value;
+        setProductData(data);
+    }
+    const saveProductCategory = (value) => {
+        let data = {...productData};
+        data.category = value;
+        setProductData(data);
+    }
     const saveProductOptionValues = (id, field, value) => {
         let data = { ...productData };
         const editedOptionPosition = data.options.findIndex(item => item.id === id);
@@ -37,6 +45,7 @@ const AddProduct = () => {
         setloading(true);
         const categories = await fetchData('/api/categories');
         setcategorylist(categories);
+        saveProductCategory(categories[0]);
         setloading(false);
     }
     useEffect(() => {
@@ -48,17 +57,10 @@ const AddProduct = () => {
         return result;
     }
     const handleSubmission = async () => {
-        const name = productName;
-        const category = productCategory;
-        if (name && category) {
+        if (productData.name && productData.category) {
             setloading(true);
             setresult('');
-            const newProduct = {
-                name,
-                category,
-                options: [...productData.options]
-            }
-            const result = await submitNewProduct(newProduct);
+            const result = await submitNewProduct(productData);
             const resp = await result.json();
             setresult(resp.message);
             setloading(false);
@@ -70,11 +72,8 @@ const AddProduct = () => {
             <p>{result}</p>
             <ProductForm
                 loading={loading}
-                productName={productName}
-                setproductName={setproductName}
-                productCategory={productCategory}
-                setproductCategory={setproductCategory}
-                productCategory={productCategory}
+                saveProductName={saveProductName}
+                saveProductCategory={saveProductCategory}
                 categorylist={categorylist}
                 productData={productData}
                 addNewProductOption={addNewProductOption}
