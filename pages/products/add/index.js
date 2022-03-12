@@ -12,7 +12,14 @@ const AddProduct = () => {
     const [productData, setProductData] = useState({
         name: '',
         category: '',
-        options: []
+        options: [{
+            id: crypto.randomUUID(),
+            sku: 'ABC',
+            cost: 90,
+            sellingPrice: 95,
+            mrp: 100,
+            quantity: 1
+        }]
     });
     const getProductOptionObject = () => {
         return {
@@ -24,26 +31,26 @@ const AddProduct = () => {
             quantity: 1
         }
     }
-    const saveProductOptionValues = (values) => {
+    const saveProductOptionValues = (id, field, value) => {
         let data = { ...productData };
-        const optionExists = data.options.some(item => item.id === values.id);
-        if (optionExists) {
-            const existingOptionPosition = data.options.findIndex(item => item.id === values.id);
-            data.options.splice(existingOptionPosition, 1, values);
-        }
-        else {
-            data.options.push(values);
-        }
+        const existingOptionPosition = data.options.findIndex(item => item.id === id);
+        let editedOption = data.options[existingOptionPosition];
+        editedOption[field] = value;
+        data.options.splice(existingOptionPosition, 1, editedOption);
         setProductData(data);
     }
     const removeProductOption = (id) => {
-        let data = { ...productData };
-        data.options = data.options.filter(item => item.id !== id);
-        setProductData(data);
+        if (productData.options.length > 1) {
+            let data = { ...productData };
+            data.options = data.options.filter(item => item.id !== id);
+            setProductData(data);
+        }
     }
     const addNewProductOption = () => {
         const newOption = getProductOptionObject();
-        saveProductOptionValues(newOption);
+        let data = { ...productData };
+        data.options.push(newOption);
+        setProductData(data);
     }
     const fetchCategories = async () => {
         setloading(true);
@@ -101,11 +108,20 @@ const AddProduct = () => {
                         }
                     </select>
                 </div>
-                <button className={styles.submitButton} disabled={loading} onClick={handleSubmission}>Submit</button>
-                <div>Add product options <button onClick={addNewProductOption}> + </button></div>
+                <div className={styles.inputSection}>Product options <button onClick={addNewProductOption}> Add </button></div>
                 {
-                    productData.options.map(item => <ProductOptions key={item.id} id={item.id} removeProductOption={removeProductOption} saveProductOptionValues={saveProductOptionValues} />)
+                    productData.options.map(item => <ProductOptions key={item.id}
+                        id={item.id}
+                        sku={item.sku}
+                        cost={item.cost}
+                        sellingPrice={item.sellingPrice}
+                        mrp={item.mrp}
+                        quantity={item.quantity}
+                        removeProductOption={removeProductOption}
+                        saveProductOptionValues={saveProductOptionValues}
+                    />)
                 }
+                <div className={styles.inputSection}>Save each option above before submit<button className={styles.submitButton} disabled={loading} onClick={handleSubmission}>Submit</button></div>
             </div>
         </div>
     )

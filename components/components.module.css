@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 5px;
 }
 .productOptions{
     border: 1px solid rgb(197, 197, 197);
@@ -11,5 +12,5 @@
     display: grid;
     gap: 3px;
     border-radius: 3px;
-    margin: 3px;
+    margin: 3px 0;
 }
