@@ -9,7 +9,7 @@ export default function Home() {
       <Head>
         <title>E-Store</title>
         <meta name="description" content="Sample E-Store app on Next.js" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta
           name="description"
