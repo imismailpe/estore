@@ -45,3 +45,21 @@
 .submitButton{
     
 }
+.productDetails{
+    margin: 3px;
+    border: 1px solid rgb(223, 223, 223);
+    padding: 5px;
+    display: grid;
+    gap: 5px;
+}
+.featureName{
+    display: flex;
+    margin: 3px;
+    gap: 5px;
+}
+.featureValue{
+    border: 1px solid rgb(206, 206, 206);
+    padding: 3px;
+    border-radius: 3px;
+    background-color: rgb(226, 241, 255);
+}

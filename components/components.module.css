@@ -36,3 +36,105 @@
 .submitButton{
     
 }
+.productGrid{
+    display: grid;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    grid-template-columns: repeat(auto-fit, 160px);
+    gap: 4px;
+    margin: 3px;
+}
+.deleteSection{
+    position: relative;
+    min-height: 190px;
+    background-color: rgb(248, 194, 194);
+}
+.deleteButton{
+    position: absolute;
+    bottom: 3px;
+    left: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.editButton{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+}
+.addProductForm{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid rgb(133, 133, 133);
+}
+.productCategorySelect{
+    min-width: 150px;
+}
+.inputSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+.submitButton{
+    
+}
+.productGrid{
+    display: grid;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    grid-template-columns: repeat(auto-fit, 160px);
+    gap: 4px;
+    margin: 3px;
+}
+.product{
+    display: grid;
+    border: 1px solid rgb(189, 188, 188);
+    padding: 5px;
+    margin: 4px;
+    background-color: rgb(240, 236, 232);
+    align-items: flex-start;
+    justify-content: center;
+    grid-template-rows: 145px;
+    grid-template-columns: 1fr;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.productName{
+    margin: 2px 0;
+}
+.productDetails{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #000;
+    background-color: rgba(255,255,255, 0.6);
+    border-radius: 0 0 3px 3px;
+    backdrop-filter: blur(10px);
+    padding: 0 5px;
+}
+.productName h4{
+    margin: 0;
+    padding: 5px;
+}
+.priceSection{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.priceMRP{
+    text-decoration: line-through;
+    color: rgb(128, 128, 128);
+    font-size: 0.8em;
+}
+.priceSelling{
+    color: #000;
+    font-weight: 600;
+}
