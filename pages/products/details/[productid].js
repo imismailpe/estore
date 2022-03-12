@@ -52,13 +52,13 @@ const ProductDetails = (props) => {
             <p>{loading ? 'Loading..' : ''}</p>
             <h4>{productData.name}</h4>
             <Image src={`https://picsum.photos/400/400?${productData._id}`} width={400} height={400} />
-            <div>Rs.{productData.options && productData.options.length > 1 ?productData.options[0].sellingPrice : ''}</div>
+            <div>Rs.{productData.options && productData.options.length > 1 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:
                 <div className={styles.featureName}>Colours:
-                    {optionsAvailable.colour.map(item => <span className={styles.featureValue}>{item}</span>)}
+                    {optionsAvailable.colour.map(item => <span key={item} className={styles.featureValue}>{item}</span>)}
                 </div>
                 <div className={styles.featureName}>Size:
-                    {optionsAvailable.size.map(item => <span className={styles.featureValue}>{item}</span>)}
+                    {optionsAvailable.size.map(item => <span key={item} className={styles.featureValue}>{item}</span>)}
                 </div>
             </div>
 
