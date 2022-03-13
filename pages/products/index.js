@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SpinnerDiamond } from 'spinners-react';
 import ProductList from "../../components/productsList";
 import { fetchData } from "../../utils/functions";
 import styles from '../../components/components.module.css';
@@ -18,7 +19,7 @@ const Products = () => {
     return (
         <div className={styles.productGrid}>
             {
-                loading ? <p>Loading..</p>
+                loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" />
                     : <ProductList list={productlist} />
             }
         </div>

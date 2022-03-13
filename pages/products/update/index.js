@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { SpinnerDiamond } from 'spinners-react';
 import ProductView from "../../../components/product";
 import { fetchData, submitProductDeletion } from "../../../utils/functions";
 import styles from '../../../components/components.module.css';
@@ -35,7 +35,7 @@ const UpdateProduct = () => {
             <div>{result}</div>
             <div className={styles.productGrid}>
                 {
-                    loading ? 'Loading..'
+                    loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" />
                         : productlist && productlist.length === 0 ? <div>No Products yet</div>
                             : productlist && productlist.map(product => {
                                 return <div key={product._id} className={styles.deleteSection}>

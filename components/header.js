@@ -1,4 +1,4 @@
-import styles from './index.module.css';
+import styles from './components.module.css';
 export const HeaderComp = ()=> {
     return(
         <header>

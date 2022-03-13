@@ -49,8 +49,8 @@ const ProductDetails = (props) => {
     }, [productData]);
     return (
         <div className={styles.productDetailsContainer}>
-            <p>{loading ? 'Loading..' : ''}</p>
-            <h4>{productData.name}</h4>
+            <div>{loading ? 'Loading..' : ''}</div>
+            <div className={styles.productTitle}><h4>{productData.name}</h4></div>
             <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
             <div>Rs.{productData.options && productData.options.length > 1 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:

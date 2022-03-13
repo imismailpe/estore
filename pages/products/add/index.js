@@ -11,12 +11,12 @@ const AddProduct = () => {
         options: [getProductOptionObject()]
     });
     const saveProductName = (value) => {
-        let data = {...productData};
+        let data = { ...productData };
         data.name = value;
         setProductData(data);
     }
     const saveProductCategory = (value) => {
-        let data = {...productData};
+        let data = { ...productData };
         data.category = value;
         setProductData(data);
     }
@@ -69,7 +69,7 @@ const AddProduct = () => {
     return (
         <div>
             <h4>Add a product</h4>
-            <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
+            <div>{result}</div>
             <ProductForm
                 loading={loading}
                 saveProductName={saveProductName}
