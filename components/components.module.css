@@ -181,3 +181,8 @@
     top: 0;
     overflow: auto;
 }
+.centerAligned{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

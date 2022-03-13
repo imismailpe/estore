@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductForm from "../../../components/productForm";
 import { fetchData, getProductOptionObject, submitProduct } from "../../../utils/functions";
+import styles from '../../../components/components.module.css';
 const AddProduct = () => {
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
@@ -70,6 +71,7 @@ const AddProduct = () => {
         <div>
             <h4>Add a product</h4>
             <div>{result}</div>
+            <div className={styles.centerAligned}>
             <ProductForm
                 loading={loading}
                 saveProductName={saveProductName}
@@ -81,6 +83,7 @@ const AddProduct = () => {
                 saveProductOptionValues={saveProductOptionValues}
                 handleSubmission={handleSubmission}
             />
+            </div>
         </div>
     )
 }
