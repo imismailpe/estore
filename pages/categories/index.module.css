@@ -9,7 +9,6 @@
 .deleteCategorySection{
     position: relative;
     background-color: rgb(255, 219, 219);
-    border: 1px solid rgb(185, 185, 185);
     margin: 1px;
     display: flex;
     justify-content: space-between;
