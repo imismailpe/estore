@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SpinnerDiamond } from 'spinners-react';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../utils/functions";
@@ -20,7 +21,6 @@ const ProductDetails = (props) => {
             size: [],
         };
         data.options && data.options.forEach(option => {
-            console.log("colour is", `${option['colour']}`)
             if (!optionsMap['colour'].includes(option['colour'])) {
                 optionsMap['colour'].push(option['colour'])
             }
@@ -28,7 +28,6 @@ const ProductDetails = (props) => {
                 optionsMap['size'].push(option['size'])
             }
         });
-        console.log(optionsMap)
         setOptionsAvailable(optionsMap);
     }
     const fetchProductDetails = async () => {
@@ -49,10 +48,10 @@ const ProductDetails = (props) => {
     }, [productData]);
     return (
         <div className={styles.productDetailsContainer}>
-            <div>{loading ? 'Loading..' : ''}</div>
+            <div>{loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" /> : ''}</div>
             <div className={styles.productTitle}><h4>{productData.name}</h4></div>
             <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
-            <div>Rs.{productData.options && productData.options.length > 1 ? productData.options[0].sellingPrice : ''}</div>
+            <div>Rs.{productData.options && productData.options.length > 0 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:
                 <div className={styles.featureName}>Colours:
                     {optionsAvailable.colour.map(item => <span key={item} className={styles.featureValue}>{item}</span>)}
