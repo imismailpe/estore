@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "nvm use 20 next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "mongodb": "^4.4.1",
     "next": "12.2.0",
+    "node": "20.9.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "spinners-react": "^1.0.6",
