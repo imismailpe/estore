@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from './components.module.css';
 const ProductView = ({ product = {} }) => {
@@ -9,7 +8,7 @@ const ProductView = ({ product = {} }) => {
     return (
         <Link href={detailUrl}>
             <div className={styles.product}>
-                <Image src={`https://picsum.photos/180/180?${product._id}`} width={155} height={180} />
+                <img src={`https://picsum.photos/180/180?${product._id}`} width={155} className={styles.prodSquare} />
                 <div className={styles.productDetails}>
                     <h4 className={styles.productName}>{product.name}</h4>
                     <div className={styles.priceSection}>

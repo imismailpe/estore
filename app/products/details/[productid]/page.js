@@ -1,5 +1,4 @@
 'use client'
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../../utils/functions";
 import styles from '../../../../components/components.module.css';
@@ -34,7 +33,7 @@ const ProductDetails = (props) => {
     const fetchProductDetails = async () => {
         setloading(true);
         const data = await fetchData('/api/products/' + productId);
-        if (data.length > 0) {
+        if (data?.length > 0) {
             setProductData(data[0]);
         }
         setloading(false);
@@ -51,7 +50,7 @@ const ProductDetails = (props) => {
         <div className={styles.productDetailsContainer}>
             <div>{loading ? <div>Loading</div> : ''}</div>
             <div className={styles.productTitle}><h4>{productData.name}</h4></div>
-            <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
+            <img src={`https://picsum.photos/800/400?${productData._id}`} width={800} className={styles.prodImg} />
             <div>Rs.{productData.options && productData.options.length > 0 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:
                 <div className={styles.featureName}>Colours:
