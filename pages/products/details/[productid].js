@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { SpinnerDiamond } from 'spinners-react';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../utils/functions";
@@ -48,7 +47,7 @@ const ProductDetails = (props) => {
     }, [productData]);
     return (
         <div className={styles.productDetailsContainer}>
-            <div>{loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" /> : ''}</div>
+            <div>{loading ? <div>Loading</div> : ''}</div>
             <div className={styles.productTitle}><h4>{productData.name}</h4></div>
             <Image src={`https://picsum.photos/800/400?${productData._id}`} width={800} height={400} />
             <div>Rs.{productData.options && productData.options.length > 0 ? productData.options[0].sellingPrice : ''}</div>

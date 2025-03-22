@@ -1,10 +1,9 @@
-import { SpinnerDiamond } from 'spinners-react';
 import ProductOptions from "./productOptions";
 import styles from './components.module.css';
 
 const ProductForm = (props) => {
     return (
-        props.loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" />
+        props.loading ? <div>Loading</div>
             : <div className={styles.addProductForm}>
                 <div className={styles.inputSection}>
                     <label htmlFor="productname">Name</label>

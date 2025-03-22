@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { SpinnerDiamond } from 'spinners-react';
 import { fetchData, submitCategory, submitCategoryDeletion } from "../../utils/functions";
 import styles from './index.module.css';
 
@@ -66,7 +65,7 @@ const AddCategory = () => {
             <div>Existing Categories</div>
             <div className={styles.categoryGrid}>
                 {
-                    loading ? <SpinnerDiamond size={50} thickness={180} speed={80} color="rgba(142, 172, 57, 1)" secondaryColor="rgba(0, 0, 0, 1)" />
+                    loading ? <div>Loading</div>
                         : categorylist && categorylist.length === 0 ? <div>No Categories yet</div>
                             : categorylist && categorylist.map(category => {
                                 return <div key={category._id} className={styles.deleteCategorySection}>
