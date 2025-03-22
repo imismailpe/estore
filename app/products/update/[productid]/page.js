@@ -1,13 +1,13 @@
 'use client'
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react"
-import ProductForm from "../../../components/productForm";
-import { fetchData, getProductOptionObject, submitProductUpdate } from "../../../utils/functions";
-import styles from '../../../components/components.module.css';
+import ProductForm from "../../../../components/productForm";
+import { fetchData, getProductOptionObject, submitProductUpdate } from "../../../../utils/functions";
+// import styles from '../../../../components/components.module.css';
 
 const EditProduct = () => {
-    const router = useRouter();
-    const productId = router.query.productid;
+    const params = useSearchParams();
+    const productId = params.get("productid");
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
     const [categorylist, setcategorylist] = useState([]);    

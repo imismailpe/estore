@@ -1,13 +1,13 @@
 'use client'
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchData } from "../../../utils/functions";
-import styles from '../../../components/components.module.css';
+import { fetchData } from "../../../../utils/functions";
+import styles from '../../../../components/components.module.css';
 
 const ProductDetails = (props) => {
-    const router = useRouter();
-    const productId = router.query.productid;
+    const params = useSearchParams();
+    const productId = params.get("productid");
     const [loading, setloading] = useState(false);
     const [productData, setProductData] = useState({
         name: '',
