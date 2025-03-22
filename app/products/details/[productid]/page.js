@@ -40,7 +40,7 @@ const ProductDetails = (props) => {
         setloading(false);
     }
     useEffect(() => {
-        if (productid) {
+        if (productId) {
             fetchProductDetails();
         }
     }, []);
