@@ -6,10 +6,7 @@ const ProductView = ({ product = {} }) => {
         return null;
     }
     return (
-        <Link href={{
-            pathname: `/products/details/[productid]`,
-            query: { productid: product._id }
-        }}>
+        <Link href={`/products/details/${product._id}`}>
             <div className={styles.product}>
                 <Image src={`https://picsum.photos/180/180?${product._id}`} width={155} height={180} />
                 <div className={styles.productDetails}>
