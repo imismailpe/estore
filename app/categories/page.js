@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from "react";
 import { fetchData, submitCategory, submitCategoryDeletion } from "../../utils/functions";
 import styles from './index.module.css';

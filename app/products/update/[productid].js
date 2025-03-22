@@ -1,23 +1,28 @@
-import { useEffect, useState } from "react";
+'use client'
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react"
 import ProductForm from "../../../components/productForm";
-import { fetchData, getProductOptionObject, submitProduct } from "../../../utils/functions";
+import { fetchData, getProductOptionObject, submitProductUpdate } from "../../../utils/functions";
 import styles from '../../../components/components.module.css';
-const AddProduct = () => {
+
+const EditProduct = () => {
+    const router = useRouter();
+    const productId = router.query.productid;
     const [loading, setloading] = useState(false);
     const [result, setresult] = useState('');
-    const [categorylist, setcategorylist] = useState([]);
+    const [categorylist, setcategorylist] = useState([]);    
     const [productData, setProductData] = useState({
         name: '',
         category: '',
-        options: [getProductOptionObject()]
+        options: []
     });
     const saveProductName = (value) => {
-        let data = { ...productData };
+        let data = {...productData};
         data.name = value;
         setProductData(data);
     }
     const saveProductCategory = (value) => {
-        let data = { ...productData };
+        let data = {...productData};
         data.category = value;
         setProductData(data);
     }
@@ -42,26 +47,36 @@ const AddProduct = () => {
         data.options.push(newOption);
         setProductData(data);
     }
+    const fetchProductToUpdate = async () => {
+        setloading(true);
+        const data = await fetchData('/api/products/' + productId);
+        if (data.length > 0) {
+            setProductData(data[0]);
+        }
+        setloading(false);
+    }
+
     const fetchCategories = async () => {
         setloading(true);
         const categories = await fetchData('/api/categories');
         setcategorylist(categories);
-        saveProductCategory(categories[0]);
         setloading(false);
     }
     useEffect(() => {
-        fetchCategories();
+        if (productId) {
+            fetchProductToUpdate();
+            fetchCategories();
+        }
     }, []);
-    const submitNewProduct = async (product) => {
-        console.log("product", product)
-        const result = await submitProduct(product);
+    const handleProductUpdate = async (product) => {
+        const result = await submitProductUpdate(product);
         return result;
     }
     const handleSubmission = async () => {
         if (productData.name && productData.category) {
             setloading(true);
             setresult('');
-            const result = await submitNewProduct(productData);
+            const result = await handleProductUpdate(productData);
             const resp = await result.json();
             setresult(resp.message);
             setloading(false);
@@ -69,9 +84,8 @@ const AddProduct = () => {
     }
     return (
         <div>
-            <h4>Add a product</h4>
-            <div>{result}</div>
-            <div className={styles.centerAligned}>
+            <h4>Update a product</h4>
+            <p>{result}<span>{loading ? 'Loading..' : ''}</span></p>
             <ProductForm
                 loading={loading}
                 saveProductName={saveProductName}
@@ -83,8 +97,7 @@ const AddProduct = () => {
                 saveProductOptionValues={saveProductOptionValues}
                 handleSubmission={handleSubmission}
             />
-            </div>
         </div>
     )
 }
-export default AddProduct;
+export default EditProduct;

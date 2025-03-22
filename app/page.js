@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -6,21 +5,9 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>E-Store</title>
-        <meta name="description" content="Sample E-Store app on Next.js" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="Web site created using create-react-app"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h4 className={styles.title}>
-          E-Store
+          E-Stores
         </h4>
         <div className={styles.grid}>
           <Link href='/products/add' className={styles.card}>
@@ -64,4 +51,9 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export const metadata = {
+  title: "E-Store",
+  description: 'Sample E-Store app on Next.js',
 }

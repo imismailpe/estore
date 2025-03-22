@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import ProductView from "../../../components/product";
