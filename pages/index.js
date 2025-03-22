@@ -23,29 +23,29 @@ export default function Home() {
           E-Store
         </h4>
         <div className={styles.grid}>
-          <Link href='/products/add' >
-            <a className={styles.card}>
+          <Link href='/products/add' className={styles.card}>
+            {/* <a className={styles.card}> */}
               <h2>Add Products &rarr;</h2>
               <p>Add products to store</p>
-            </a>
+            {/* </a> */}
           </Link>
-          <Link href='/categories' >
-            <a className={styles.card}>
+          <Link href='/categories' className={styles.card}>
+            {/* <a className={styles.card}> */}
               <h2>Manage Category &rarr;</h2>
               <p>Add/Delete categories of products</p>
-            </a>
+            {/* </a> */}
           </Link>
-          <Link href={'/products'}>
-            <a className={styles.card}>
+          <Link href={'/products'} className={styles.card}>
+            {/* <a className={styles.card}> */}
               <h2>View Products &rarr;</h2>
               <p>View available products</p>
-            </a>
+            {/* </a> */}
           </Link>
-          <Link href={'/products/update'}>
-            <a className={styles.card}>
+          <Link href={'/products/update'} className={styles.card}>
+            {/* <a className={styles.card}> */}
               <h2>Update Products &rarr;</h2>
               <p>Update/Delete products</p>
-            </a>
+            {/* </a> */}
           </Link>
         </div>
       </main>
