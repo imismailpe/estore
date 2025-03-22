@@ -21,7 +21,8 @@ export async function getDocumentUsingId(collection, id, sort) {
     try {
         const client = await getDBClient();
         const db = client.db();
-        const documents = await db.collection(collection).find({ _id: ObjectId(id) }).sort(sort).toArray();
+        const docId = new ObjectId(id);
+        const documents = await db.collection(collection).find({ _id: docId }).sort(sort).toArray();
         client.close();
         return { "success": true, data: documents };
     }
@@ -47,7 +48,8 @@ export async function deleteDocument(collection, id) {
     try {
         const client = await getDBClient();
         const db = client.db();
-        const result = await db.collection(collection).deleteOne({ _id: ObjectId(id) });
+        const docId = new ObjectId(id);
+        const result = await db.collection(collection).deleteOne({ _id: docId });
         client.close();
         return { "success": true, "message": `${result.deletedCount} document(s) deleted successfully` };
     }
@@ -60,8 +62,9 @@ export async function updateDocument(collection, id, data) {
     try {
         const client = await getDBClient();
         const db = client.db();
+        const docId = new ObjectId(id);
         const result = await db.collection(collection).updateOne(
-            { _id: ObjectId(id) },
+            { _id: docId },
             { $set: data }
         );
         client.close();

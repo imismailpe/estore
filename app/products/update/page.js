@@ -30,6 +30,7 @@ const UpdateProduct = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
+
     return (
         <Fragment>
             <div>{result}</div>
@@ -38,15 +39,12 @@ const UpdateProduct = () => {
                     loading ? <div>Loading</div>
                         : productlist && productlist.length === 0 ? <div>No Products yet</div>
                             : productlist && productlist.map(product => {
+                                const updateUrl = `/products/update/${product._id}`
                                 return <div key={product._id} className={styles.deleteSection}>
                                     <ProductView product={product} />
                                     <button className={styles.deleteButton} onClick={(e) => deleteProductId(product._id)}>Delete</button>
                                     <button className={styles.editButton}>
-                                        <Link href={{
-                                            pathname: `/products/update/[productid]`,
-                                            query: { productid: product._id }
-                                        }}
-                                        >Edit</Link>
+                                        <Link href={updateUrl}>Edit</Link>
                                     </button>
                                 </div>
                             })

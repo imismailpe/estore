@@ -1,13 +1,14 @@
 'use client'
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../../../utils/functions";
 import styles from '../../../../components/components.module.css';
+import { useParams } from "next/navigation";
 
 const ProductDetails = (props) => {
-    const params = useSearchParams();
-    const productId = params.get("productid");
+    const params = useParams();
+    const productId = params.productid;
+
     const [loading, setloading] = useState(false);
     const [productData, setProductData] = useState({
         name: '',
@@ -32,14 +33,14 @@ const ProductDetails = (props) => {
     }
     const fetchProductDetails = async () => {
         setloading(true);
-        const data = await fetchData('/api/products/' + productId);
+        const data = await fetchData('/api/products/' + router.query.productid);
         if (data.length > 0) {
             setProductData(data[0]);
         }
         setloading(false);
     }
     useEffect(() => {
-        if (productId) {
+        if (productid) {
             fetchProductDetails();
         }
     }, []);

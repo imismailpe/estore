@@ -5,8 +5,9 @@ const ProductView = ({ product = {} }) => {
     if (Object.keys(product).length === 0) {
         return null;
     }
+    const detailUrl = `/products/details/${product._id}`
     return (
-        <Link href={`/products/details/${product._id}`}>
+        <Link href={detailUrl}>
             <div className={styles.product}>
                 <Image src={`https://picsum.photos/180/180?${product._id}`} width={155} height={180} />
                 <div className={styles.productDetails}>
