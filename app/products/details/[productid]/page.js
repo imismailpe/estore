@@ -33,7 +33,7 @@ const ProductDetails = (props) => {
     }
     const fetchProductDetails = async () => {
         setloading(true);
-        const data = await fetchData('/api/products/' + router.query.productid);
+        const data = await fetchData('/api/products/' + productId);
         if (data.length > 0) {
             setProductData(data[0]);
         }
