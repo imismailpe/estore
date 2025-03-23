@@ -49,8 +49,10 @@ const ProductDetails = (props) => {
     return (
         <div className={styles.productDetailsContainer}>
             <div>{loading ? <div>Loading</div> : ''}</div>
-            <div className={styles.productTitle}><h4>{productData.name}</h4></div>
+            <div className={styles.productLayout}>
             <img src={`https://picsum.photos/800/400?${productData._id}`} width={800} className={styles.prodImg} />
+            <section>
+            <div className={styles.productTitle}><h4>{productData.name}</h4></div>
             <div>Rs.{productData.options && productData.options.length > 0 ? productData.options[0].sellingPrice : ''}</div>
             <div>Available options:
                 <div className={styles.featureName}>Colours:
@@ -61,6 +63,8 @@ const ProductDetails = (props) => {
                 </div>
             </div>
 
+            </section>
+            </div>
         </div >
     )
 }

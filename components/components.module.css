@@ -157,11 +157,16 @@
     color: #000;
     font-weight: 600;
 }
+.productLayout{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 .productDetailsContainer{
     margin: 3px;
     border: 1px solid rgb(223, 223, 223);
     padding: 5px;
-    display: grid;
+    display: flex;
     gap: 5px;
 }
 .featureName{
@@ -171,7 +176,9 @@
     gap: 5px;
 }
 .productTitle h4{
-    margin: 5px;
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 700;
 }
 .featureValue{
     border: 1px solid rgb(206, 206, 206);

@@ -3,7 +3,7 @@ export const HeaderComp = ()=> {
     return(
         <header>
             <div className={styles.headerSection}>
-                E-Store
+                <a href="/">E-Store</a>
             </div>
         </header>
     )
