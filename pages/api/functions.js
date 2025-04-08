@@ -1,7 +1,13 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
+let cachedClient = null;
+
 export async function getDBClient() {
+    if(cachedClient){
+        return cachedClient
+    }
     const client = await MongoClient.connect(`mongodb+srv://${process.env.ESTORE_DBUSERNAME}:${process.env.ESTORE_DBPASSWORD}@cluster0.mi20r.mongodb.net/eStoreDB?retryWrites=true&w=majority`);
+    cachedClient = client;
     return client;
 }
 export async function getAllDocuments(collection, sort, filter = {}) {
@@ -9,7 +15,6 @@ export async function getAllDocuments(collection, sort, filter = {}) {
         const client = await getDBClient();
         const db = client.db();
         const documents = await db.collection(collection).find(filter).sort(sort).toArray();
-        client.close();
         return { "success": true, data: documents };
     }
     catch (e) {
@@ -23,7 +28,6 @@ export async function getDocumentUsingId(collection, id, sort) {
         const db = client.db();
         const docId = new ObjectId(id);
         const documents = await db.collection(collection).find({ _id: docId }).sort(sort).toArray();
-        client.close();
         return { "success": true, data: documents };
     }
     catch (e) {
@@ -36,7 +40,6 @@ export async function insertDocument(collection, data) {
         const client = await getDBClient();
         const db = client.db();
         await db.collection(collection).insertOne(data);
-        client.close();
         return { "success": true, "message": "Added successfully"  };
     }
     catch (e) {
@@ -50,7 +53,6 @@ export async function deleteDocument(collection, id) {
         const db = client.db();
         const docId = new ObjectId(id);
         const result = await db.collection(collection).deleteOne({ _id: docId });
-        client.close();
         return { "success": true, "message": `${result.deletedCount} document(s) deleted successfully` };
     }
     catch (e) {
@@ -67,7 +69,6 @@ export async function updateDocument(collection, id, data) {
             { _id: docId },
             { $set: data }
         );
-        client.close();
         return { "success": true, "message": `Updated ${result.modifiedCount} document(s)` };
     }
     catch (e) {
@@ -83,7 +84,6 @@ export async function upsertDocument(collection, data){
         const options = { upsert: true };
         const update = { $set: { ...data }};
         await db.collection(collection).updateOne(query, update, options);
-        client.close();
         return { "success": true, "message": "Added successfully"  };
     } catch(e){
         console.log("error in upsertDocument", e);
@@ -95,7 +95,6 @@ export async function getUserByEmail(email){
         const client = await getDBClient();
         const db = client.db();
         const documents = await db.collection("users").find({ email: email }).toArray();
-        client.close();
         return { "success": true, data: documents };
     }
     catch (e) {
