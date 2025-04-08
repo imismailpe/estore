@@ -65,3 +65,12 @@ export const getProductOptionObject = () => {
         colour: ''
     }
 }
+export const getUserData = async (email) => {
+    const result = await fetch(`/api/user/${email}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    return result;
+}

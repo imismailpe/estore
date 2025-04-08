@@ -1,6 +1,14 @@
-import { login } from "../../app/lib/auth";
+"use client"
+
+import { signIn } from "next-auth/react";
 
 const LoginButton = ({ method, ...rest }) => {
-  return <button onClick={() => login(method)}>{rest.children}</button>;
+  const onLogin = async () => {
+    await signIn(method, {
+        redirectTo: "/",
+        callbackUrl: "/"
+      }).catch(e => console.log("signIn error:",e));
+  }
+  return <button onClick={onLogin}>{rest.children}</button>;
 };
 export default LoginButton;

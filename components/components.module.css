@@ -3,7 +3,7 @@
     height: 50px;
     background-color: rgb(187, 204, 153);
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 0 5px;
     position: sticky;

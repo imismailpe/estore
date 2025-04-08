@@ -74,4 +74,32 @@ export async function updateDocument(collection, id, data) {
         console.log("error connecting db", e);
         return { "success": false, "message": `${e}` };
     }
+};
+export async function upsertDocument(collection, data){
+    try{
+        const client = await getDBClient();
+        const db = client.db();
+        const query = { email: data.email };
+        const options = { upsert: true };
+        const update = { $set: { ...data }};
+        await db.collection(collection).updateOne(query, update, options);
+        client.close();
+        return { "success": true, "message": "Added successfully"  };
+    } catch(e){
+        console.log("error in upsertDocument", e);
+        return { "success": false, "message": `${e}`};
+    }
+};
+export async function getUserByEmail(email){
+    try {
+        const client = await getDBClient();
+        const db = client.db();
+        const documents = await db.collection("users").find({ email: email }).toArray();
+        client.close();
+        return { "success": true, data: documents };
+    }
+    catch (e) {
+        console.log("error connecting db", e);
+        return { "success": false, "message": `${e}` };
+    }
 }
