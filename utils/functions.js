@@ -62,7 +62,8 @@ export const getProductOptionObject = () => {
         sellingPrice: 95,
         mrp: 100,
         quantity: 1,
-        colour: ''
+        colour: '',
+        size: ''
     }
 }
 export const getUserData = async (email) => {
