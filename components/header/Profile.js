@@ -22,6 +22,8 @@ const Profile = () => {
   }
   useEffect(() => {
     if(session?.user?.email){
+      //roleId added to session to save user early. using L758
+      dispatch(setUser(session?.user));
       getData();
     }
   },[session]);

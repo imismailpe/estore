@@ -73,7 +73,7 @@
   /* margin: 1rem; */
   padding: 1.5rem;
   text-align: left;
-  color: inherit;
+  color: #3d3d3d;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
@@ -85,8 +85,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #5d815d;
+  border-color: #5d815d;
 }
 
 .card h2 {
