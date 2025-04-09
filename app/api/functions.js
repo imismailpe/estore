@@ -18,7 +18,7 @@ export async function getAllDocuments(collection, sort, filter = {}) {
         return { "success": true, data: documents };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in getAllDocuments", e);
         return { "success": false, "message": `${e}` };
     }
 }
@@ -31,7 +31,7 @@ export async function getDocumentUsingId(collection, id, sort) {
         return { "success": true, data: documents };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in getDocumentUsingId", e);
         return { "success": false, "message": `${e}` };
     }
 }
@@ -39,11 +39,11 @@ export async function insertDocument(collection, data) {
     try {
         const client = await getDBClient();
         const db = client.db();
-        await db.collection(collection).insertOne(data);
-        return { "success": true, "message": "Added successfully"  };
+        const result = await db.collection(collection).insertOne(data);
+        return { "success": result.acknowledged, "message": "Added successfully"  };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in insertDocument", e);
         return { "success": false, "message": `${e}`};
     }
 }
@@ -53,10 +53,10 @@ export async function deleteDocument(collection, id) {
         const db = client.db();
         const docId = new ObjectId(id);
         const result = await db.collection(collection).deleteOne({ _id: docId });
-        return { "success": true, "message": `${result.deletedCount} document(s) deleted successfully` };
+        return { "success": result.acknowledged, "message": `${result.deletedCount} document(s) deleted successfully` };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in deleteDocument", e);
         return { "success": false, "message": `${e}` };
     }
 }
@@ -69,10 +69,10 @@ export async function updateDocument(collection, id, data) {
             { _id: docId },
             { $set: data }
         );
-        return { "success": true, "message": `Updated ${result.modifiedCount} document(s)` };
+        return { "success": result.acknowledged, "message": `Updated ${result.modifiedCount} document(s)` };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in updateDocument", e);
         return { "success": false, "message": `${e}` };
     }
 };
@@ -83,8 +83,8 @@ export async function upsertDocument(collection, data){
         const query = { email: data.email };
         const options = { upsert: true };
         const update = { $set: { ...data }};
-        await db.collection(collection).updateOne(query, update, options);
-        return { "success": true, "message": "Added successfully"  };
+        const result = await db.collection(collection).updateOne(query, update, options);
+        return { "success": result.acknowledged, "message": "Added successfully"  };
     } catch(e){
         console.log("error in upsertDocument", e);
         return { "success": false, "message": `${e}`};
@@ -98,7 +98,7 @@ export async function getUserByEmail(email){
         return { "success": true, data: documents };
     }
     catch (e) {
-        console.log("error connecting db", e);
+        console.log("error in getUserByEmail", e);
         return { "success": false, "message": `${e}` };
     }
 }

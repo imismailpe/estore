@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { upsertDocument } from "../functions";
+import { upsertDocument } from "../../functions";
 
 const handler = NextAuth({
   session: {
