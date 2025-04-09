@@ -20,7 +20,7 @@ export async function POST(req) {
 }
 export async function PUT(req) {
   const body = await req.json();
-  const { name, category, options } = body;
+  const { name, category, options, _id } = body;
   const updatedProduct = {
     name,
     category,
@@ -28,11 +28,11 @@ export async function PUT(req) {
   };
   const dbResult = await updateDocument(
     "products",
-    req.body._id,
+    _id,
     updatedProduct
   );
 
-  return new Response(dbResult, {
+  return Response.json(dbResult, {
     status: 201,
   });
 }

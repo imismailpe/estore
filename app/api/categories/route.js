@@ -7,7 +7,7 @@ export async function POST(req) {
     name,
   };
   const dbResult = await insertDocument("categories", newData);
-  return new Response(dbResult, {
+  return Response.json(dbResult, {
     status: 201,
   });
 }
