@@ -54,7 +54,6 @@ const AddProduct = () => {
         fetchCategories();
     }, []);
     const submitNewProduct = async (product) => {
-        console.log("product", product)
         const result = await submitProduct(product);
         return result;
     }
