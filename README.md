@@ -1,3 +1,6 @@
+This app allows you to view products data from database. Admin can Signin with the Google account and perform all CRUD operations. It uses sample data in the format of a ecom app.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
